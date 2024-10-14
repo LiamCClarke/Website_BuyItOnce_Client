@@ -1,0 +1,93 @@
+<script setup>
+</script>
+
+<template>
+    <div class="content-wrapper">
+        <div class="sign-up">
+            <div class="logo-container">
+                <div class="logo">
+                    <router-link :to="{ name: 'Home' }"><h1 class="title">BIO.</h1></router-link>
+                </div>
+            </div>
+            <form>
+                <label for="username">Username</label>
+                <input id="username">
+                <label for="email">Email</label>
+                <input id="email" type="email">
+                <label for="password">Password</label>
+                <input id="password" type="password">
+                <input class="submit-button" type="submit" value="Create Account">
+            </form>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 200px 0 200px;
+}
+
+.title {
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.sign-up {
+    max-width: 350px;
+    max-height: 450px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 20px;
+    height: 450px;
+    width: 350px;
+    padding: 40px;
+}
+
+.logo-container {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+form label {
+    font-weight: 600;
+    width: 100%;
+}
+
+form input {
+    padding: 8px 12px;
+    height: 42px;
+    border: 1px solid hsla(0, 0%, 100%, .05);
+    border-radius: 8px;
+    background-color: hsla(0, 0%, 100%, .05);
+    padding: 4px;
+    font-size: 14px;
+}
+
+.form-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-button {
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+}
+</style>
