@@ -1,4 +1,27 @@
 <script setup>
+import { ref, computed } from 'vue'
+
+const username = ref('');
+const email = ref('');
+const password = ref('');
+
+// Password Requirements
+const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+const numbers = /[0-9]/;
+const passwordMinLength = 8;
+const isMinimumLength = computed(() => {
+    return password.value.length >= (passwordMinLength) ? true : false;
+});
+const hasSpecialCharacter = computed(() => {
+    return specialChars.test(password.value);
+});
+const hasNumber = computed(() => {
+    return numbers.test(password.value);
+});
+
+function handleSubmit() {
+    console.log('form submitted');
+}
 </script>
 
 <template>
@@ -9,13 +32,22 @@
                     <router-link :to="{ name: 'Home' }"><h1 class="title">BIO.</h1></router-link>
                 </div>
             </div>
-            <form>
+            <!-- .prevent on the submit event stops default page refresh html behaviour -->
+            <form @submit.prevent="handleSubmit">
                 <label for="username">Username</label>
-                <input id="username">
+                <input id="username" v-model="username">
                 <label for="email">Email</label>
-                <input id="email" type="email">
+                <input id="email" type="email" v-model="email">
                 <label for="password">Password</label>
-                <input id="password" type="password">
+                <input id="password" type="password" v-model="password">
+                <ul>
+                    <li>Longer than {{ passwordMinLength }} characters</li>
+                    <li>Contains at least 1 special character</li>
+                    <li>Contains at least 1 number</li>
+                </ul>
+                <p>{{ isMinimumLength }}</p>
+                <p>{{ hasSpecialCharacter }}</p>
+                <p>{{ hasNumber }}</p>
                 <input class="submit-button" type="submit" value="Create Account">
             </form>
         </div>
