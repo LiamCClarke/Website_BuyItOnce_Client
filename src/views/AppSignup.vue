@@ -19,6 +19,10 @@ const hasNumber = computed(() => {
     return numbers.test(password.value);
 });
 
+const isSubmitDisabled = computed(() => {
+    return !isMinimumLength.value || !hasSpecialCharacter.value || !hasNumber.value;
+});
+
 function handleSubmit() {
     console.log('form submitted');
 }
@@ -40,15 +44,12 @@ function handleSubmit() {
                 <input id="email" type="email" v-model="email">
                 <label for="password">Password</label>
                 <input id="password" type="password" v-model="password">
-                <ul>
-                    <li>Longer than {{ passwordMinLength }} characters</li>
-                    <li>Contains at least 1 special character</li>
-                    <li>Contains at least 1 number</li>
+                <ul class="password-criteria-list">
+                    <li class="password-criteria" :class="{ passed: isMinimumLength, failed: !isMinimumLength }">Longer than {{ passwordMinLength }} characters</li>
+                    <li class="password-criteria" :class="{ passed: hasSpecialCharacter, failed: !hasSpecialCharacter }">Contains at least 1 special character</li>
+                    <li class="password-criteria" :class="{ passed: hasNumber, failed: !hasNumber }">Contains at least 1 number</li>
                 </ul>
-                <p>{{ isMinimumLength }}</p>
-                <p>{{ hasSpecialCharacter }}</p>
-                <p>{{ hasNumber }}</p>
-                <input class="submit-button" type="submit" value="Create Account">
+                <input :disabled="isSubmitDisabled" class="submit-button" type="submit" value="Create Account">
             </form>
         </div>
     </div>
@@ -73,11 +74,11 @@ function handleSubmit() {
 
 .sign-up {
     max-width: 350px;
-    max-height: 450px;
+    max-height: 500px;
     background-color: var(--secondary-color);
     border: none;
     border-radius: 20px;
-    height: 450px;
+    height: 500px;
     width: 350px;
     padding: 40px;
 }
@@ -121,5 +122,21 @@ form input {
     align-items: center;
     justify-content: center;
     background-color: var(--accent-color);
+}
+
+.password-criteria-list {
+    list-style-type: circle;
+    list-style-position: inside;
+}
+
+.passed {
+    color: green;
+}
+
+.failed {
+    color: red;
+}
+.password-criteria {
+    font-size: 12px;
 }
 </style>
