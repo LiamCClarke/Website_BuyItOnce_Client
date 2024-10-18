@@ -11,6 +11,7 @@
                     </ul>
                 </nav>
                 <a class="cta" href="#"><button>Learn More</button></a>
+                <router-link :to="{ name: 'Sign-up' }">Sign up</router-link>
             </div>
         </div>
     </header>
